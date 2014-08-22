@@ -46,26 +46,31 @@ def insertion_sort(array A):
 
 ```
 #partition and merge
-#time O(nlog(n)) space O(nlog(n))
+#time O(nlog(n)) space O(n) (extra copy of array required if not merging in place)
+#merge sort is stable
 
-def merge_sort(array A):
-  if len(A) <= 1:
-    return A
-  else:
-    A1 = merge_sort(A[0:mid])
-    A2 = merge_sort(A[mid:])
-    i,i1,i2 = 0,0,0
-    while i1<len(A1) and i2<len(A2):
-      if A1[i1] <= A2[i2]:
-        A[i++] = A1[i1++]
-      else:
-        A[i++] = A2[i2++]
-    while i1 < len(A1):
-      A[i++] = A1[i1++]
-    while i2 < len(A2):
-      A[i++] = A2[i2++]
-  return A
+def merge_sort(array A, start index i, end index j):
+  if j <= i+1:
+    return
+  mid = (i + j) / 2
+  merge_sort(A, i, mid)
+  merge_sort(A, mid, j)
+  B = empty array of size len(A)
+  i1,i2,i3 = i,mid,0
+  while i1<mid and i2<j:
+    if A[i1] <= A[i2]:
+      B[i3++] = A[i1++]
+    else:
+      B[i3++] = A[i2++]
+  while i1 < mid:
+    B[i3++] = A[i1++]
+  while i2 < j:
+    B[i3++] = A[i2++]
+  i1,i2=i,0
+  while i2 < len(B):
+    A[i1++] = B[i2++]
 ```
+
 
 #### Quick
 
