@@ -49,8 +49,13 @@ def insertion_sort(array A):
 #time O(nlog(n)) space O(n) (extra copy of array required if not merging in place)
 #merge sort is stable
 
+#high level work flow
+1) deal with base case
+2) recursively merge sort left half and right half
+3) merge sorted left half and sorted right half into a new array
+4) copy sorted new array back
+
 def merge_sort(array A, start index i, end index j):
-  # base case
   if j <= i+1:
     return
     
@@ -78,14 +83,46 @@ def merge_sort(array A, start index i, end index j):
 
 #### Quick
 
+```
+#partition array around a pivot element so that elements on the 
+#left are smaller and elements on the right are larger than the 
+#pivot element
 
-#### Randomized Quick
+#quick sort is an unstable in-place sorting algorithm
+
+#high level work flow
+1) deal with base case
+1) choose pivot element p and move it to the end
+3) partition around p
+4) recursively sort both sides (no combine/merge required)
+
+def quick_sort(array A, start index l, end index r):
+  if r <= l+1:
+    return
+  
+  p = index of chosen pivot (l <= p < r)
+  swap A[p], A[r-1]
+  
+  i,j = l,l
+  while j < r-1:
+    if A[j] < A[r-1]:
+      swap A[i], A[j]
+      i++
+    j++
+  swap A[i], A[r-1]
+  
+  quick_sort(A, l, i)
+  quick_sort(A, i+1, r)
+```
 
 
 #### Counting
 
 
 #### Radix
+
+
+#### Shell
 
 
 #### File
@@ -131,3 +168,5 @@ def sort_and_count(array A, start index i, end index j):
 
   return left_inversions + right_inversions + split_inversions
 ```
+
+#### Sort iteratively
