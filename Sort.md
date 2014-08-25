@@ -118,8 +118,28 @@ def quick_sort(array A, start index l, end index r):
 
 #### Counting
 
+```
+# sort many small integers
+# not a comparison based sort, often used in radix sort
+# running time is O(n)
+
+def count_sort(array A):
+  count_table = []
+  for elem in A:
+    count_table[elem]++
+  
+  k = 0
+  for i in [0, len(count_table)):
+    do count_table[i] times:
+      A[k++] = i
+
+```
+
 
 #### Radix
+
+
+#### Bucket
 
 
 #### Shell
