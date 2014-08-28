@@ -115,29 +115,54 @@ def quick_sort(array A, start index l, end index r):
   quick_sort(A, i+1, r)
 ```
 
+#### Heap sort
+
 
 #### Counting
 
 ```
 # sort many small integers
 # not a comparison based sort, often used in radix sort
-# running time is O(n)
+# running time is O(n+k) ([0,k) is the range of elements in A)
 
 def count_sort(array A):
-  count_table = []
+  count_table = [] of length k
   for elem in A:
     count_table[elem]++
   
-  k = 0
+  j = 0
   for i in [0, len(count_table)):
     do count_table[i] times:
-      A[k++] = i
-
+      A[j++] = i
 ```
 
 
 #### Radix
 
+```
+# useful when the number of digits of each of the input elements
+# is small.
+
+# workflow
+say all numbers have at most k digits
+for i in [1..k]:
+  sort the input based on the ith least significant digit, any stable
+  sort method will do, usually count sort is used
+
+# time O(n*k) space O(n)
+# k is Omega(log(n))
+
+def radix_sort(array A, number of digits k):
+  for i in [1..k]:
+    B = array of 10 lists
+    for a in A:
+      d=(a%(10^i))/(10^(i-1)) # ith digit from left to right
+      B[d].add(a)
+    j=0
+    for i in [0..9]:
+      for e in B[i]:
+        A[j++]=e
+```
 
 #### Bucket
 
@@ -159,11 +184,12 @@ def count_sort(array A):
 #Insertion sort time O(n^2) space O(1)
 #Top down merge sort time O(nlog(n)) space O(log(n))
 #Bottom up merge sort time O(nlog(n)) space O(1)
-#Algorithm:
-# get length of list len
-# for k in (1,2,4,8,...) where k<=len:
-#   split list into segments of length k
-#   merge adjacent two segments
+
+#High level workflow:
+get length of list len
+for k in (1,2,4,8,...) where k<=len:
+  split list into segments of length k
+  merge adjacent two segments
 
 
 def bottom_up_mergesort_linkedlist(node head):
@@ -260,4 +286,4 @@ def sort_and_count(array A, start index i, end index j):
 #### Sort iteratively
 
 
-#### Prove lower bound of comparison based sort is O(nlog(n))
+#### Prove lower bound of comparison based sort is Omega(nlog(n))
