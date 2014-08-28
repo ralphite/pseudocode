@@ -153,7 +153,75 @@ def count_sort(array A):
 
 ### Relevant questions
 
-#### Sort a linked list
+#### Sort a linked list (**bottom up merge sort**)
+
+```
+#Insertion sort time O(n^2) space O(1)
+#Top down merge sort time O(nlog(n)) space O(log(n))
+#Bottom up merge sort time O(nlog(n)) space O(1)
+#Algorithm:
+# get length of list len
+# for k in (1,2,4,8,...) where k<=len:
+#   split list into segments of length k
+#   merge adjacent two segments
+
+
+def bottom_up_mergesort_linkedlist(node head):
+  len = length of linkedlist
+  
+  dummy head dm
+  for seg_len=1; seg_len<=len; seg_len*=2:
+    dm.next=null
+    cursor c=dm
+    
+    cursors c1,c2,c3=head,head,null
+    while c1 != null:
+      c3=null # so that we can quit from while loop when the end is reached
+      for i=0; i<seg_len-1; i++:
+        if c2!=null:
+          c2=c2.next
+        else:
+          break
+      if c2!=null:
+        tmp=c2
+        c2=c2.next
+        tmp.next=null
+        c3=c2
+        for i=0; i<seg_len-1; i++:
+          if c3!=null:
+            c3=c3.next
+          else:
+            break
+        if c3!=null:
+          tmp=c3
+          c3=c3.next
+          tmp.next=null
+          
+      while c1!=null && c2!=null:
+        if c1.val<=c2.val:
+          c.next=c1
+          c1=c1.next
+          c=c.next
+        else:
+          c.next=c2
+          c2=c2.next
+          c=c.next
+      while c1!=null:
+        c.next=c1
+        c1=c1.next
+        c=c.next
+      while c2!=null:
+        c.next=c2
+        c2=c2.next
+        c=c.next
+        
+      c1,c2=c3,c3
+      
+    head=dm.next
+    
+  return dm.next
+```
+
 
 #### Counting invertions
 
@@ -190,3 +258,6 @@ def sort_and_count(array A, start index i, end index j):
 ```
 
 #### Sort iteratively
+
+
+#### Prove lower bound of comparison based sort is O(nlog(n))
